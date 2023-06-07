@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 // пакет celebrate
 const { errors } = require('celebrate');
+const cors = require('cors');
 
 // eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
 const helmet = require('helmet');
@@ -15,6 +16,7 @@ const { PORT = 3000 } = process.env;
 
 // Здесь мы создаем экземпляр приложения Express и настраиваем middleware для обработки JSON-данных.
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(helmet());
 
