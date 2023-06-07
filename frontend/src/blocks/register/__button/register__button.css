@@ -1,0 +1,29 @@
+.register__button {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #000000;
+  background-color: #ffffff;
+  height: 50px;
+  border-radius: 2px;
+  margin-top: 216px;
+  bottom: 0;
+  cursor: pointer;
+  width: 100%;
+  display: block;
+  position: absolute;
+}
+
+.register__button:hover {
+  opacity: 0.85;
+}
+@media screen and (max-width: 378px) {
+  .register__button {
+    margin-top: 173px;
+    font-size: 16px;
+    line-height: 19px;
+  }
+}

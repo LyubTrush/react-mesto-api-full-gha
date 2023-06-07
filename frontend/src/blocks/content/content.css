@@ -1,0 +1,19 @@
+.content {
+    padding-top: 0px;
+    max-width: 880px;
+    margin: 0 auto;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+
+@media screen and (max-width: 970px) {
+    .content {
+       padding: 0px 45px 0;
+    } 
+}
+@media screen and (max-width: 378px) {
+    .content {
+        padding: 0px 19px 0; 
+    }
+}
+    

@@ -1,0 +1,14 @@
+.header__btn-out {
+  text-decoration: none;
+  transition: opacity 0.2s linear;
+  color: #ffff;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.header__btn-out:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

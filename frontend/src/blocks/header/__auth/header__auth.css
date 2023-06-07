@@ -1,0 +1,13 @@
+.header__auth {
+  display: flex;
+  margin-top: 0px;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: right;
+  color: #ffff;
+  
+}

@@ -1,0 +1,25 @@
+.register__input {
+    background-color: transparent;
+    border: none;
+    margin-top: 30px;
+    border-bottom: 2px solid #CCCCCC;
+    padding: 0 0 13px 0;
+    width: 100%;
+    color: #CCCCCC;
+}
+
+/* .register__input {
+    background-color: transparent;
+    border: none;
+    margin-top: 30px;
+    border-bottom: 2px solid #CCCCCC;
+    padding: 0 0 13px 0;
+    width: 100%;
+    color: #CCCCCC;
+}
+
+@media screen and (max-width: 320px) {
+    .register__input{
+    width: 260px;
+    }
+  } */

@@ -1,0 +1,6 @@
+.element__like-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 22px;
+    justify-content: space-between;
+}

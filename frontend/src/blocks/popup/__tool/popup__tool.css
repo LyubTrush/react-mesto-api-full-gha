@@ -1,0 +1,11 @@
+.popup__tool {
+    background-color: #fff;
+    box-sizing: border-box;
+    width: 430px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    padding: 60px 36px;
+}

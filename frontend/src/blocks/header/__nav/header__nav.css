@@ -1,0 +1,14 @@
+.header__nav {
+
+  display: flex;
+  align-items: center;
+
+}
+
+@media screen and (max-width: 671px) {
+  .header__nav {
+    display: none;
+  }
+}
+
+

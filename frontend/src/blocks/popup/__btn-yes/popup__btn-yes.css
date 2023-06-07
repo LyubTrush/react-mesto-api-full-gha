@@ -1,0 +1,9 @@
+.popup__btn-yes {
+    margin: 36px;
+}
+
+@media screen and (max-width: 671px) {
+    .popup__btn-yes {
+        margin: 23px;
+    }
+}
