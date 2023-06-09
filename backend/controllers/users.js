@@ -11,7 +11,7 @@ const ConflictError = require('../errors/ConflictError');
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.send({ data: users }))
+    .then((users) => res.send(users))
     .catch(next);
 };
 
@@ -43,7 +43,7 @@ module.exports.getUserById = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Пользователь не найден');
       }
-      res.send({ data: user });
+      res.send(user);
     })
     // eslint-disable-next-line consistent-return
     .catch((err) => {
@@ -61,10 +61,13 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       // аутентификация успешна! пользователь в переменной user
     // создадим токен
+      if (!user || !password) {
+        return next(new BadRequestError('Неверный email или пароль.'));
+      }
       const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
       console.log({ token });
       // вернём токен
-      res.send({ token });
+      return res.send({ token });
     })
     .catch(next);
 };
@@ -130,7 +133,7 @@ module.exports.updateProfile = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Пользователь не найден');
       }
-      res.send({ data: user });
+      res.send(user);
     })
   // eslint-disable-next-line consistent-return
     .catch((err) => {

@@ -11,11 +11,10 @@ module.exports.getCards = (req, res, next) => {
 
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
-  const owner = req.user._id;
   Card.create({
     name,
     link,
-    owner,
+    owner: req.user._id,
   })
     .then((card) => res.status(201).send(card))
     // eslint-disable-next-line consistent-return
@@ -61,7 +60,7 @@ module.exports.likeCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Карточка не найдена');
       }
-      res.send({ data: card });
+      res.send(card);
     })
     // eslint-disable-next-line consistent-return
     .catch((err) => {
@@ -83,7 +82,7 @@ module.exports.dislikeCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Карточка не найдена');
       }
-      res.send({ data: card });
+      res.send(card);
     })
     // eslint-disable-next-line consistent-return
     .catch((err) => {
