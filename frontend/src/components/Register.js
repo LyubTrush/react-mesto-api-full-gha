@@ -16,7 +16,7 @@ export default function Register({ onSubmit }) {
       };
       onSubmit(formData);
     },
-    [email, password]
+    [email, onSubmit, password]
   );
 
   return (

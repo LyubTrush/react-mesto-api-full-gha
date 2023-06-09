@@ -1,5 +1,5 @@
 // базовый URL
-const BASE_AUTH_URL = "https://auth.nomoreparties.co";
+const BASE_AUTH_URL = "http://localhost:3000";
 
 const handleRes = (response) => {
   return response.ok
@@ -11,6 +11,7 @@ export const register = (email, password) => {
   return fetch(`${BASE_AUTH_URL}/signup`, {
     method: "POST",
     headers: {
+      "Accept": "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(email, password),
@@ -32,7 +33,7 @@ export const checkAuth = (token) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      'Authorization': `Bearer ${token}`,
     },
   }).then(handleRes);
 };

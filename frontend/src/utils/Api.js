@@ -1,24 +1,21 @@
 class Api {
-  constructor({ baseUrl, headers }) {
+  constructor({ baseUrl }) {
     this._baseUrl = baseUrl;
-    this._headers = headers;
   }
 
   _processingServer(res) {
     return res.ok ? res.json() : Promise.reject(`код ошибки: ${res.status}`);
-
-    // if (res.ok) {
-    //   return res.json();
-    // } else {
-    //   return Promise.reject(`код ошибки: ${res.status}`);
-    // }
   }
 
   //редактирование профиля
   setProfileData(userData) {
-    return fetch(`${this._baseUrl}users/me`, {
+    const token = localStorage.getItem("jwt");
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         name: userData.name,
         about: userData.about,
@@ -27,68 +24,91 @@ class Api {
   }
 
   setAvatar(link) {
-    return fetch(`${this._baseUrl}users/me/avatar`, {
+    const token = localStorage.getItem("jwt");
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: this._headers,
-      body: JSON.stringify({
-        avatar: link,
-      }),
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(
+        link,
+      ),
     }).then((res) => this._processingServer(res));
   }
 
   //метод получения карточек с сервера
   getInitialCards() {
-    return fetch(`${this._baseUrl}cards`, {
-      headers: this._headers,
+    const token = localStorage.getItem("jwt");
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
     }).then((res) => this._processingServer(res));
   }
 
   //метод добавления новой карточки
-  addCard({ name, link }) {
-    return fetch(`${this._baseUrl}cards`, {
+  addCard({name, link}) {
+    const token = localStorage.getItem("jwt");
+    return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
-        name,
-        link,
+        name: name,
+        link: link
       }),
     }).then((res) => this._processingServer(res));
   }
 
   deleteCard(cardId) {
+    const token = localStorage.getItem("jwt");
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
     }).then((res) => this._processingServer(res));
   }
 
   likeResolve(cardId, isLiked) {
+    const token = localStorage.getItem("jwt");
     if (isLiked === false) {
       return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: "PUT",
-        headers: this._headers,
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
       }).then((res) => this._processingServer(res));
     } else {
       return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: "DELETE",
-        headers: this._headers,
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
       }).then((res) => this._processingServer(res));
     }
   }
 
   getUserInfo() {
+    const token = localStorage.getItem("jwt");
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
     }).then((res) => this._processingServer(res));
   }
 }
 
 const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-60/",
-  headers: {
-    authorization: "07ee7a40-2dda-43a0-8aeb-c95180da94fb",
-    "Content-Type": "application/json",
-  },
+  baseUrl: "http://localhost:3000",
 });
 
 export default api;

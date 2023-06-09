@@ -2,9 +2,9 @@
 //Добавьте ещё одну переменную стейта cards с пустым массивом в качестве значения по умолчанию. Добавьте второй запрос
 //к API за соответствующими данными.
 
-import React, { useState, useEffect } from "react";
-import Avatar from "../images/Avatar.png";
-import api from "../utils/Api.js";
+import React from "react";
+// import Avatar from "../images/Avatar.png";
+// import api from "../utils/Api.js";
 import Card from "./Card.js";
 import { CurrentUserContext } from "../context/CurrentUserContext";
 

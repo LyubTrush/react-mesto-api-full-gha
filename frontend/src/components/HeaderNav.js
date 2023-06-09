@@ -10,8 +10,8 @@ export default function HeaderNav(props) {
         <Link
           to="/signin"
           className="header__text"
-          button
-          hover
+          button="true"
+          hover="true"
           onClick={props.logOut}
         >
           Выйти

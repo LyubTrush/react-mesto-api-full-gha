@@ -4,6 +4,10 @@ import PopupWithForm from "./PopupWithForm";
 export default function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
   const nameRef = React.useRef();
   const urlRef = React.useRef();
+ React.useEffect(() => {
+    nameRef.current.value = "";
+    urlRef.current.value = "";
+  }, [isOpen]);
 
   function handleSubmit(e) {
     e.preventDefault();

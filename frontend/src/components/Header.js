@@ -28,7 +28,7 @@ export default function Header(props) {
           <Route
             path="signup"
             element={
-              <Link to="/signin" className="header__text" button hover>
+              <Link to="/signin" className="header__text" button="true" hover="true">
                 Войти
               </Link>
             }
@@ -36,7 +36,7 @@ export default function Header(props) {
           <Route
             path="signin"
             element={
-              <Link to="/signup" className="header__text" button hover>
+              <Link to="/signup" className="header__text" button="true" hover="true">
                 Регистрация
               </Link>
             }

@@ -25,7 +25,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
-  const [DeletedCard, setDeletedCard] = useState(null);
+ // const [DeletedCard, setDeletedCard] = useState(null);
   const [cards, setCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [registerMessage, setRegisterMessage] = useState(null);
@@ -80,11 +80,11 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((like) => like._id === currentUser._id);
-
+    const isLiked = card.likes.some((id) => id === currentUser._id);
+    const jwt = localStorage.getItem('jwt');
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
-      .likeResolve(card._id, isLiked)
+      .likeResolve(card._id, isLiked, jwt)
       .then((newCard) => {
         setCards((state) =>
           state.map((c) => (c._id === card._id ? newCard : c))
@@ -120,8 +120,7 @@ function App() {
         .signin(email, password)
         .then((response) => {
           if (response.token) {
-            localStorage.setItem("token", response.token);
-            setEmail(email);
+            localStorage.setItem("jwt", response.token);
             setLoggedIn(true);
             navigate("/");
           }
@@ -137,23 +136,25 @@ function App() {
   );
 
   function handleLogOut() {
-    localStorage.removeItem("token");
+    localStorage.removeItem("jwt");
+    navigate('/signin');
     setEmail("");
     setLoggedIn(false);
   }
-
+// проверка токена 
   const checkAuthorisation = React.useCallback(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("jwt");
     token &&
       auth
         .checkAuth(token)
         .then((response) => {
-          setEmail(response.data.email);
+          setEmail(response.email);
           setLoggedIn(true);
           navigate("/");
         })
         .catch((err) => {
           console.log(err);
+          localStorage.removeItem("token");
         });
   }, [navigate]);
 
@@ -163,8 +164,9 @@ function App() {
   }, [checkAuthorisation]);
 
   function handleCardDelete(card) {
+    const jwt = localStorage.getItem('jwt');
     api
-      .deleteCard(card._id)
+      .deleteCard(card._id, jwt)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== card._id));
       })
@@ -174,8 +176,9 @@ function App() {
   }
 
   function handleUpdateUser(userInfo) {
+    const jwt = localStorage.getItem('jwt');
     api
-      .setProfileData(userInfo)
+      .setProfileData(userInfo, jwt)
       .then((newUserInfo) => {
         setCurrentUser(newUserInfo);
         closeAllPopups();
@@ -186,8 +189,9 @@ function App() {
     console.log(userInfo);
   }
   function handleUpdateAvatar(link) {
+    const jwt = localStorage.getItem('jwt');
     api
-      .setAvatar(link.avatar)
+      .setAvatar(link, jwt)
       .then((user) => {
         setCurrentUser(user);
         closeAllPopups();
@@ -197,9 +201,10 @@ function App() {
       });
   }
 
-  function handleAddPlaceSubmit(name, link) {
+  function handleAddPlaceSubmit(data) {
+    const jwt = localStorage.getItem('jwt');
     api
-      .addCard(name, link)
+      .addCard(data, jwt)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();

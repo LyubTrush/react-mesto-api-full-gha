@@ -1,8 +1,8 @@
 //компонент авторизации пользователя с необходимыми стейт-переменными.
 
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import * as auth from "../utils/Auth";
+// import { Link, useNavigate } from "react-router-dom";
+// import * as auth from "../utils/Auth";
 
 export default function Login({ onSubmit }) {
   const [userValue, setUserValue] = React.useState({ email: "", password: "" });
