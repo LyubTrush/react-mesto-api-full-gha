@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 62.84.118.211
+IP 62.84.118.211
 
 Frontend https://lovelly.nomoredomains.rocks
 
