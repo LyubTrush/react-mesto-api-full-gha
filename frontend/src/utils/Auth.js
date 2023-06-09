@@ -1,5 +1,5 @@
 // базовый URL
-const BASE_AUTH_URL = "http://localhost:3000";
+const BASE_AUTH_URL = "https://api.lovelly.nomoredomains.rocks";
 
 const handleRes = (response) => {
   return response.ok
