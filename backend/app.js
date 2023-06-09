@@ -1,4 +1,6 @@
 // app.js — входной файл
+// eslint-disable-next-line import/no-extraneous-dependencies
+require('dotenv').config();
 // Здесь мы подключаем Express для создания сервера, Mongoose для работы с MongoDB
 const express = require('express');
 const mongoose = require('mongoose');
@@ -23,6 +25,11 @@ app.use(helmet());
 // подключаемся к серверу mongo
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 app.use(requestLogger); // подключаем логгер запросов
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 app.use(routes);
 app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors());
